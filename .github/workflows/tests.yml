@@ -41,7 +41,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create empty tests/Unit directory (if missing)
+      # Create an empty tests/Unit directory if needed
+      - name: Create tests directory
         run: mkdir -p tests/Unit
 
       - name: Setup PHP
@@ -66,6 +67,13 @@ jobs:
 
       - name: Generate application key
         run: php artisan key:generate
+
+      # Install Node dependencies and build assets to generate the Vite manifest.
+      - name: Install Node dependencies
+        run: yarn install
+
+      - name: Build assets
+        run: yarn build
 
       - name: Wait for MySQL to be ready
         run: |
