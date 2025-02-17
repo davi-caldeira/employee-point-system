@@ -19,4 +19,16 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+        // Throttle password reset email requests to 6 per minute.
+        $this->middleware('throttle:6,1')->only('sendResetLinkEmail');
+    }
 }
