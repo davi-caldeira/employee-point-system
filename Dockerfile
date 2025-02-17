@@ -27,7 +27,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Install PHP dependencies (vendor folder is now created fresh)
-RUN composer install --prefer-dist --no-dev --optimize-autoloader
+RUN composer install 
 
 # Install Yarn dependencies and build assets
 RUN yarn install && yarn build
